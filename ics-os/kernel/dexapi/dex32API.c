@@ -56,6 +56,12 @@ int api_removesystemcall(DWORD function_number){
    return -1;
 };
 
+int kchown(int fd, int uid, int gid){
+   printf("Changing owner of fd=%d to user id=%d and group id=%d\n", fd, uid, gid);
+   //Actual code to change file ownership is placed here.
+   return 0; //0-success
+}
+
 void api_init(){
    int i;
 
@@ -94,6 +100,7 @@ void api_init(){
    api_addsystemcall(0x1a,getparentid,0,0);
    api_addsystemcall(0x1b,findprocessname,0,0);
    api_addsystemcall(0x1c,loadDLL,0,0);
+   api_addsystemcall(0x9F, kchown, 0, 0);
      
    api_addsystemcall(30,module_getfxn,0,0);
    api_addsystemcall(31,ps_seterror,0,0);
